@@ -29,11 +29,9 @@ class GroqLLMClient:
         self._model = model
 
     def chat(self, messages: list[dict], tools: list[dict] | None = None):
-        response = self._client.chat.completions.create(
-            model=self._model,
-            messages=messages,
-            tools=tools,
-            tool_choice="auto" if tools else None,
-            temperature=0.2,
-        )
+        kwargs: dict = {"model": self._model, "messages": messages, "temperature": 0.2}
+        if tools:
+            kwargs["tools"] = tools
+            kwargs["tool_choice"] = "auto"
+        response = self._client.chat.completions.create(**kwargs)
         return response.choices[0].message

@@ -6,7 +6,7 @@ crashing the agent loop.
 """
 from __future__ import annotations
 
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 import trafilatura
 
 from agent.config import MAX_PAGE_CHARS, MAX_SEARCH_RESULTS
